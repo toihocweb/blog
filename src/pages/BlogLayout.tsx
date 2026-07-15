@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Clock, ChevronDown, ChevronRight } from 'lucide-react';
 
 interface DocItem {
@@ -134,12 +136,30 @@ export default function BlogLayout() {
     return <div className="loading"><div className="loading-spinner">Loading docs...</div></div>;
   }
 
-  // Custom renderer for headings to add IDs for the TOC
+  // Custom renderer for headings to add IDs for the TOC and Syntax Highlighting for code
   const components = {
     h2: ({node, ...props}: any) => {
       const text = String(props.children);
       const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-');
       return <h2 id={id} {...props} />;
+    },
+    code({node, className, children, ...props}: any) {
+      const match = /language-(\w+)/.exec(className || '');
+      return match ? (
+        <SyntaxHighlighter
+          style={vscDarkPlus as any}
+          language={match[1]}
+          PreTag="div"
+          customStyle={{ background: 'transparent', padding: 0, margin: 0 }}
+          {...props}
+        >
+          {String(children).replace(/\n$/, '')}
+        </SyntaxHighlighter>
+      ) : (
+        <code className={className} {...props}>
+          {children}
+        </code>
+      );
     }
   };
 

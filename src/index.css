@@ -234,8 +234,6 @@ a {
   flex: 1;
   overflow-y: auto;
   background: var(--bg-primary);
-  display: flex;
-  justify-content: center;
   transition: background-color 0.3s ease;
   scroll-behavior: smooth;
 }
@@ -243,7 +241,8 @@ a {
 .doc-content-container {
   width: 100%;
   max-width: 1100px;
-  padding: 3rem 4rem 6rem;
+  margin: 0 auto;
+  padding: 3rem 4rem 10vh;
 }
 
 /* Right Sidebar (Table of Contents) */
@@ -430,6 +429,32 @@ a {
   margin: 2rem 0;
 }
 
+/* Table Styles */
+.markdown-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  display: block;
+  overflow-x: auto;
+}
+
+.markdown-body th,
+.markdown-body td {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-glass);
+  text-align: left;
+}
+
+.markdown-body th {
+  background-color: var(--bg-secondary);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.markdown-body tr:nth-child(even) {
+  background-color: var(--bg-glass);
+}
+
 .empty-state {
   display: flex;
   justify-content: center;
@@ -500,7 +525,7 @@ body.sidebar-open .mobile-overlay {
   }
 
   .doc-content-container {
-    padding: 2rem 1.5rem 4rem;
+    padding: 2rem 1.5rem 10vh;
   }
 
   .article-header h1 {
