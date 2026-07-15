@@ -6,7 +6,7 @@ export default function Header() {
     <header className="header">
       <div className="header-nav">
         <Link to="/" className="logo">
-          ReactDocs.
+          NoDocs.
         </Link>
         <nav className="nav-links">
           <ThemeToggle />
