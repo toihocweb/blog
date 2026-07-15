@@ -58,6 +58,14 @@ export default function BlogLayout() {
     if (!activeDoc) return;
     
     setLoadingContent(true);
+    setHeadings([]); // Clear old TOC
+    
+    // Reset scroll position to top when switching pages
+    const mainContainer = document.querySelector('.doc-main');
+    if (mainContainer) {
+      mainContainer.scrollTo(0, 0);
+    }
+    
     fetch(activeDoc.file)
       .then(res => res.text())
       .then(text => {
