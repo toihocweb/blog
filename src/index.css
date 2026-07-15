@@ -95,6 +95,21 @@ a {
   align-items: center;
 }
 
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 4px;
+}
+
 .logo {
   font-family: 'Outfit', sans-serif;
   font-size: 1.25rem;
@@ -432,9 +447,72 @@ a {
   color: var(--accent-primary);
 }
 
+/* Overlay for mobile menu */
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 30;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+body.sidebar-open .mobile-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 /* Responsive Hide TOC on smaller screens */
 @media (max-width: 1200px) {
   .doc-toc {
     display: none;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: flex;
+  }
+  
+  .mobile-overlay {
+    display: block;
+    pointer-events: none;
+  }
+
+  .doc-sidebar {
+    position: fixed;
+    top: var(--header-height);
+    left: -100%;
+    height: calc(100vh - var(--header-height));
+    z-index: 40;
+    transition: left 0.3s ease;
+    width: 280px;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+  }
+
+  body.sidebar-open .doc-sidebar {
+    left: 0;
+  }
+
+  .doc-content-container {
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  .article-header h1 {
+    font-size: 2.2rem;
+  }
+
+  .markdown-body h2 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .markdown-body blockquote {
+    padding: 1rem 1.5rem;
   }
 }

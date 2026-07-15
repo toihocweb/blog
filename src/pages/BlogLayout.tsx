@@ -145,6 +145,12 @@ export default function BlogLayout() {
 
   return (
     <div className="doc-layout">
+      {/* Mobile Overlay */}
+      <div 
+        className="mobile-overlay" 
+        onClick={() => document.body.classList.remove('sidebar-open')}
+      ></div>
+
       <aside className="doc-sidebar">
         {categories.map(cat => (
           <div key={cat.category} className="doc-category">
@@ -166,6 +172,7 @@ export default function BlogLayout() {
                     <Link 
                       to={`/post/${item.id}`} 
                       className={`doc-nav-link ${item.id === id ? 'active' : ''}`}
+                      onClick={() => document.body.classList.remove('sidebar-open')}
                     >
                       {item.title}
                     </Link>
